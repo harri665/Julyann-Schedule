@@ -2,8 +2,15 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Day from './Day';
+import ReactDOM from 'react-dom/client';
+import DayOverview from '../DayOverview';
+import { useSlotProps } from '@mui/base';
+
 const Frame = styled.div`
   width: 100%;
+  border: 1px solid lightgrey;
+  box-shadow: 2px 2px 2px #eee;
+  color:"white"; 
 `;
 
 const Header = styled.div`
@@ -13,25 +20,28 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #f5f6fa;
+  color:"white"; 
 `;
 
 const Button = styled.div`
   cursor: pointer;
+  color:"white"; 
 `;
 
 const Body = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  color:"white"; 
 `;
 
 
-  //     background-color: #eee;
-  //   `};
 
 
 
-export default function Calendar() {
+
+
+export default function Calendar(props:any) {
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_OF_THE_WEEK = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
@@ -43,6 +53,8 @@ export default function Calendar() {
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
+  const remaining = new Date(year,month+1,0).getDay()
+  
 
   useEffect(() => {
     setDay(date.getDate());
@@ -72,21 +84,22 @@ export default function Calendar() {
       </Header>
       <Body>
         {DAYS_OF_THE_WEEK.map(d => (
-            <div className='day'>
-              <strong>{d}</strong>
-            </div>
+          <div className='day' key={d}>
+            <strong>{d}</strong>
+          </div>
         ))}
-        {Array(days[month] + (startDay - 1))  
+        {Array(days[month] + (startDay + (6-remaining)))
           .fill(null)
           .map((_, index) => {
             const d = index - (startDay - 2);
+            console.log(index)
             return (
               <Day
                 key={index}
-                
-                // isToday={d === today.getDate()}
-                // isSelected={d === day}
-                onClick={() => setDate(new Date(year, month, d))}
+                index = {index}
+                schedule = {props.schedule}
+                date = {new Date(year, month, d)}
+                onClick={() => openDayOverview(new Date(year, month, d),props)}
               >
                 {d > 0 ? d : ''}
               </Day>
@@ -95,4 +108,19 @@ export default function Calendar() {
       </Body>
     </Frame>
   );
+}
+
+function openDayOverview(datein:Date, props:any) {
+  var overviewroot = document.createElement("div"); 
+  overviewroot.id = "overviewroot"; 
+  document.body.appendChild(overviewroot)
+  
+  const root = ReactDOM.createRoot(document.querySelector("#overviewroot"))
+  root.render(
+    
+    <DayOverview date = {datein} schedule = {props.schedule}/>
+    
+  )
+
+
 }

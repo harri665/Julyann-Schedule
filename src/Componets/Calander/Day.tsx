@@ -10,13 +10,23 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Avatar from '@mui/joy/Avatar';
 
 export default function Day(props:any) {
-    const test = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    console.log(props.date.getMonth()-1,props.date.getDate())
+    var schedule = props.schedule.Year[props.date.getMonth()-1][props.date.getDate()-1]
+    console.log(schedule,props.date)
+    let weekclass = "week" + Math.trunc(props.index/7)
+    let classes = weekclass + " day"
+    function hover(week:any) {
+        document.getElementsByClassName(weekclass)
+    }
     return(
-        <div className='day'>
+        <div className={classes}   onMouseEnter={()=> hover(Math.trunc(props.index/7))}>
             <CssVarsProvider>
                 <List
+                    // key = {props.key}
+                    onClick = {props.onClick}
                     variant="outlined"
                     sx={{
+                        width:"100%",
                         "--list-gap":"0px",
                         "--List-item-minHeight": "3px",
                         "--List-item-paddingY": "0px",
@@ -25,13 +35,24 @@ export default function Day(props:any) {
                         "--List-divider-gap": "1px"
                     }}
                 >
-                    {test.map((value)=>
-                        <ListItem>
+                    <ListItem
+                        sx = {{
+                            color:"lightblue"
+                        }}
+                    >{props.date.getDate()}</ListItem>
+                    
+                    {schedule.people.map((value:any)=>
+                        <ListItem
+                            sx ={{
+                                color:"white"
+                            }}
+                        >
                             <ListItemDecorator sx={{ alignSelf: 'flex-start' }}>
                                 <Avatar size="sm" src="/static/images/avatar/1.jpg" />
                             </ListItemDecorator>
-                            {value}
+                            {value.firstname + " " + value.lastname.substr(0,1)}
                         </ListItem>
+                        
                     )}
                 </List>
             </CssVarsProvider>

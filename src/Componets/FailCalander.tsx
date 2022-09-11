@@ -8,6 +8,7 @@ export default function Calander(props:any) {
     const firstofmonth = new Date(din.getFullYear(),din.getMonth(),1);
     const endofmonth = new Date(din.getFullYear(),din.getMonth(),getDaysInMonth(din.getMonth(),din.getFullYear()));
 
+    const MonthData = props.schedule
     //setup the month array
     const monthdayarr = [];
     for(let x =0; x< firstofmonth.getDay(); x++) {
