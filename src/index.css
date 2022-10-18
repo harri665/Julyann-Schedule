@@ -39,3 +39,8 @@ body {
 #personoverviewrow p{
   display:inline-block; 
 }
+
+.error {
+  background-color: red;
+  color:red; 
+}

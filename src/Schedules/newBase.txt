@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "FullYear":2022
+  },
+  "Year": []
+}

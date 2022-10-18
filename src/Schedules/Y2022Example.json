@@ -1,4 +1,7 @@
 {
+  "properties": {
+    "FullYear":2022
+  },
   "Year": [
     [
       {
@@ -868,11 +871,9 @@
         "people": [
           {
             "firstname": "Harrison",
-            "lastname":"Martin",
-            "start":10,
-            "end":12
-            
-            
+            "lastname": "Martin",
+            "start": 10,
+            "end": 12
           }
         ]
       },
@@ -1243,9 +1244,17 @@
       {
         "daystats": {},
         "people": []
+      },
+      {
+        "daystats": {},
+        "people": []
       }
     ],
     [
+      {
+        "daystats": {},
+        "people": []
+      },
       {
         "daystats": {},
         "people": []

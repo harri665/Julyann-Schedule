@@ -6,10 +6,12 @@ import ReactDOM from 'react-dom/client';
 import { CssVarsProvider } from '@mui/joy/styles';
 import Calander from './Componets/Calander/Calander';
 import { getInitColorSchemeScript } from '@mui/joy/styles';
+import { DataHandler } from './DataHandler';
 
-var PrevSchedule = require('./Schedules/Y2021.json')
-var CurSchedule = require('./Schedules/Y2022.json')
-var NextSchedule = require('./Schedules/Y2023.json')
+// var PrevSchedule = require('./Schedules/Y2021.json')
+var CurSchedule = new DataHandler()
+console.log(CurSchedule.getYear(2022)) 
+// var NextSchedule = require('./Schedules/Y2023.json')
 function render() {
   const root = ReactDOM.createRoot(document.querySelector("#root"))
   // const [value, setValue] = React.useState<number[]>([20, 37]);
@@ -26,6 +28,6 @@ function render() {
   
 }
 
-render();
+// render();
 
 

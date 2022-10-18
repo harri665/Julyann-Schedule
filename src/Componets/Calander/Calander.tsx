@@ -92,7 +92,7 @@ export default function Calendar(props:any) {
           .fill(null)
           .map((_, index) => {
             const d = index - (startDay - 2);
-            console.log(index)
+            console.log(index,new Date(year ,month,d))
             return (
               <Day
                 key={index}
