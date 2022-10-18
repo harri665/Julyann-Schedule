@@ -31,3 +31,11 @@ body {
   top:0; 
   background-color: black;
 }
+
+#personoverviewrow {
+  width:100%; 
+  display:inline-block; 
+}
+#personoverviewrow p{
+  display:inline-block; 
+}
