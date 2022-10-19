@@ -92,6 +92,7 @@
     "@mui/material": "^5.10.4",
     "@mui/styled-engine-sc": "^5.10.3",
     "electron-squirrel-startup": "^1.0.0",
+    "fs": "^0.0.1-security",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.5"

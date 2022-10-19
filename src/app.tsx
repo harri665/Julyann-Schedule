@@ -10,7 +10,7 @@ import { DataHandler } from './DataHandler';
 
 // var PrevSchedule = require('./Schedules/Y2021.json')
 var CurSchedule = new DataHandler()
-console.log(CurSchedule.getYear(2022)) 
+console.log(CurSchedule.getDay(19,10,2022)) 
 // var NextSchedule = require('./Schedules/Y2023.json')
 function render() {
   const root = ReactDOM.createRoot(document.querySelector("#root"))
