@@ -1,4 +1,5 @@
 import * as React from "react";
+import ReactDOM from "react-dom/client";
 import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Slider from "@mui/joy/Slider";
@@ -6,6 +7,11 @@ import { Box } from "@mui/system";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { Input } from "@mui/joy";
 import { Grid } from "@mui/material";
+import Button from '@mui/joy/Button';
+import Menu from '@mui/joy/Menu';
+import MenuItem from '@mui/joy/MenuItem';
+import AddPersonMenu from "./AddPersonMenu";
+import Calendar from "./Calander/Calander";
 
 const monthNames = [
   "January",
@@ -32,28 +38,45 @@ function timetext(value: any) {
   }
   return out;
 }
+
 export default function (props: any) {
   // console.log(props.date)
+  //const [firstname, setfirstname] = useState("");
+  const [peoplestats,setpeoplestats] = useState(props.schedule.getDayDate(props.date).people); 
+  // const [update,setupdate] = useState(props.schedule.UPDATE)
+  const [seed, setSeed] = useState(1);
+  const reset = () => {
+       setSeed(Math.random());
+   }
+  // var peoplestats = props.schedule.getDayDate(props.date).people;
 
-  var peoplestats =
-    props.schedule.Year[props.date.getMonth() - 1][props.date.getDate() - 1]
-      .people;
   function addperson() {
-    peoplestats.push(
-      {
-        "firstname": "",
-        "lastname":"",
-        "start":0,
-        "end":24
-      }
+    var overviewroot = document.createElement("div");
+    overviewroot.id = "addperson";
+    document.body.appendChild(overviewroot);
 
-    )
+    const root = ReactDOM.createRoot(document.querySelector("#addperson"));
+
+    root.render(
+      <div>
+        <AddPersonMenu schedule = {props.schedule} date = {props.date} resetparent = {reset}/>
+      </div>
+    );
   }
   console.log(peoplestats);
   var min = 0;
   var max = 24;
   //get start
   var index = 0;
+  function closeDayOverview() {
+    // document.getElementById("overviewroot").remove();
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(
+      
+      <Calendar schedule = {props.schedule}/>
+      
+    )
+  }
   function sliderchange(event: Event, newValue: number[]) {
     console.log(newValue);
     console.log(event);
@@ -62,6 +85,14 @@ export default function (props: any) {
   }
   function inputchange(event: React.ChangeEvent<HTMLInputElement>) {
     console.log(event.target.value);
+  }
+  function removeperson(value:any) {
+    console.log(peoplestats)
+    props.schedule.removePersonDayDate(props.date,value.firstname,value.lastname); 
+    
+    setpeoplestats(props.schedule.getDayDate(props.date).people)
+    reset()
+    console.log(peoplestats)
   }
   return (
     <Box>
@@ -107,7 +138,7 @@ export default function (props: any) {
                 <p style={{ textAlign: "center" }}>{min}</p>
               </Grid>
 
-              <Grid item xs={9}>
+              <Grid item xs={8.5}>
                 <Slider
                   onChangeCommitted={sliderchange}
                   marks
@@ -132,6 +163,9 @@ export default function (props: any) {
               <Grid item xs={0.5}>
                 <p style={{ textAlign: "center" }}>{max}</p>
               </Grid>
+              <Grid item xs={0.5}>
+                <button onClick = {()=> removeperson(value)}>remove</button>
+              </Grid>
             </CssVarsProvider>
           </Grid>
         );
@@ -140,6 +174,4 @@ export default function (props: any) {
   );
 }
 
-function closeDayOverview() {
-  document.getElementById("overviewroot").remove();
-}
+

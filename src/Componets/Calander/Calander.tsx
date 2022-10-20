@@ -54,7 +54,10 @@ export default function Calendar(props:any) {
   const [year, setYear] = useState(date.getFullYear());
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
   const remaining = new Date(year,month+1,0).getDay()
-  
+  const [seed, setSeed] = useState(1);
+  const reset = () => {
+       setSeed(Math.random());
+   }
 
   useEffect(() => {
     setDay(date.getDate());
@@ -111,11 +114,11 @@ export default function Calendar(props:any) {
 }
 
 function openDayOverview(datein:Date, props:any) {
-  var overviewroot = document.createElement("div"); 
-  overviewroot.id = "overviewroot"; 
-  document.body.appendChild(overviewroot)
+  // var overviewroot = document.createElement("div"); 
+  // overviewroot.id = "overviewroot"; 
+  // document.body.appendChild(overviewroot)
   
-  const root = ReactDOM.createRoot(document.querySelector("#overviewroot"))
+  const root = ReactDOM.createRoot(document.querySelector("#root"))
   root.render(
     
     <DayOverview date = {datein} schedule = {props.schedule}/>

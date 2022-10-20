@@ -11,8 +11,8 @@ import Avatar from "@mui/joy/Avatar";
 
 export default function Day(props: any) {
   console.log(props.date.getMonth() - 1, props.date.getDate() - 1);
-  console.log(props.schedule,"find me")
-  var schedule = props.schedule.getDay(props.date); 
+  
+  var schedule = props.schedule.getDayDate(props.date); 
   //catch some erros
   if (schedule == undefined) {
     console.error(

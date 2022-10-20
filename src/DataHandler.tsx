@@ -12,11 +12,13 @@ export class DataHandler {
     
     SCHEDULES:any =[]; 
     CURDATE = new Date(); 
+    UPDATE = 0; 
+    PeopleDefault = require("./Schedules/PeopleStats.json")
     constructor() {
         console.log("started"); 
     }
     getDayDate(datein:any):any {
-        return (this.getMonth(datein.getMonth(),datein.getFullYear())[datein.getDate()-1]); 
+        return (this.getMonth(datein.getMonth()+1,datein.getFullYear())[datein.getDate()-1]); 
     }
     getDay(day:any ,month:any ,year:any):any { 
 
@@ -73,4 +75,21 @@ export class DataHandler {
         }
     }
 
+    addPersonDayDate(datein:Date,firstname:string,lastname:string,start:number,end:number){
+        var newperson = {"firstname": firstname,"lastname": lastname,"start": start,"end": end}
+        this.getDayDate(datein).people.push(newperson)
+        // this.saveYear(datein.getFullYear())
+        return newperson; 
+    }
+    removePersonDayDate(datein:Date,firstname:string,lastname:string) {
+        var day = this.getDayDate(datein)
+        for(let x=0; x < day.people.length; x++) {
+            if(day.people[x].firstname == firstname && day.people[x].lastname == lastname) {
+                day.people.splice(x,1); 
+            }
+        }
+    }
+    getPeopleDefault() {
+        return this.PeopleDefault.people; 
+    }
 }

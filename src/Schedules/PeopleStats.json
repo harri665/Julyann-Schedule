@@ -1,0 +1,15 @@
+{
+    "properties" :{
+
+    },
+    "people" :[
+        {
+            "firstname": "Harrison", 
+            "lastname":"Martin",
+            "standardweek" :[
+                
+            ]
+            
+        }
+    ] 
+}
