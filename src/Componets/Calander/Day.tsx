@@ -10,7 +10,7 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Avatar from "@mui/joy/Avatar";
 
 export default function Day(props: any) {
-  console.log(props.date.getMonth() - 1, props.date.getDate() - 1);
+  // console.log(props.date.getMonth() - 1, props.date.getDate() - 1);
   
   var schedule = props.schedule.getDayDate(props.date); 
   //catch some erros
@@ -58,7 +58,7 @@ export default function Day(props: any) {
     console.error("schedule.people not found in Day.tsx ")
     return <h1>ERROR</h1>;
   }
-  console.log(schedule, props.date);
+  // console.log(schedule, props.date);
   let weekclass = "week" + Math.trunc(props.index / 7);
   let classes = weekclass + " day";
   function hover(week: any) {
@@ -82,6 +82,7 @@ export default function Day(props: any) {
             "--List-item-paddingX": "12px",
             "--List-decorator-size": "32px",
             "--List-divider-gap": "1px",
+            "--List-radius": "20px"
           }}
         >
           <ListItem

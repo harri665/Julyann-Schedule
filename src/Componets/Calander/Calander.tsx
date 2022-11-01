@@ -19,7 +19,7 @@ const Header = styled.div`
   padding: 10px 10px 5px 10px;
   display: flex;
   justify-content: space-between;
-  background-color: #f5f6fa;
+  background-color: #054da7;
   color:"white"; 
 `;
 
@@ -89,13 +89,15 @@ export default function Calendar(props:any) {
         {DAYS_OF_THE_WEEK.map(d => (
           <div className='day' key={d}>
             <strong>{d}</strong>
+            
           </div>
         ))}
+        
         {Array(days[month] + (startDay + (6-remaining)))
           .fill(null)
           .map((_, index) => {
             const d = index - (startDay - 2);
-            console.log(index,new Date(year ,month,d))
+            // console.log(index,new Date(year ,month,d))
             return (
               <Day
                 key={index}

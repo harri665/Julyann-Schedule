@@ -10,8 +10,9 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Avatar from "@mui/joy/Avatar";
 import Textarea from "@mui/joy/Textarea";
 import Slider from "@mui/joy/Slider";
+import { Grid } from "@mui/material";
 
-export default function AddPersonMenu(props: any) {
+export default function AddPersonDay(props: any) {
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [start, setstart] = useState(0);
@@ -25,8 +26,9 @@ export default function AddPersonMenu(props: any) {
     setend(newValue[1])
   }
   function addperson() {
+    props.resetparent();  
     props.schedule.addPersonDayDate(props.date,firstname,lastname,start,end)
-    
+    close(); 
      
   }
   
@@ -79,11 +81,12 @@ export default function AddPersonMenu(props: any) {
         />
       </ListItem>
       <ListItem>
-        <button onClick={addperson}>Save</button>
+        <Button onClick={addperson}>Save</Button>
       </ListItem>
       <ListItem>
-        <button onClick = {close}>cancel</button>
+        <Button color="danger"onClick = {close}>cancel</Button>
       </ListItem>
+
     </List>
   );
 }
