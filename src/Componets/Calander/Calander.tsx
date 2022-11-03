@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Day from './Day';
 import ReactDOM from 'react-dom/client';
-import DayOverview from '../DayOverview';
+import DayOverview from '../DayOverview/DayOverview';
 import { useSlotProps } from '@mui/base';
 
 const Frame = styled.div`

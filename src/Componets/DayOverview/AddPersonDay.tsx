@@ -26,9 +26,11 @@ export default function AddPersonDay(props: any) {
     setend(newValue[1])
   }
   function addperson() {
-    props.resetparent();  
+      
     props.schedule.addPersonDayDate(props.date,firstname,lastname,start,end)
-    close(); 
+    close();
+    props.resetparent();
+     
      
   }
   
