@@ -14,6 +14,7 @@ import MenuItem from "@mui/joy/MenuItem";
 import AddPersonDay from "./AddPersonDay";
 import Calendar from "../Calander/Calander";
 import Avatar from "@mui/joy/Avatar";
+import EditPersonWeek from "../EditPersonWeek";
 const divStyle = {
   // textalign:'justify',
 };
@@ -51,7 +52,13 @@ function timetext(value: any) {
 
 export default function (props: any) {
   // fill time array
-
+  const openeditpersonweek = (value:any)=> {
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    root.render(<EditPersonWeek
+    date = {props.date}
+    schedule = {props.schedule}
+    />);
+  }
   var times = [];
   for (let x = 0; x <= 24; x++) {
     times.push(x);
@@ -106,7 +113,7 @@ export default function (props: any) {
   function inputchange(event: React.ChangeEvent<HTMLInputElement>) {
     console.log(event.target.value);
   }
-  function removeperson(value: any) {
+   const removeperson = (value: any) =>{
     console.log(peoplestats);
     props.schedule.removePersonDayDate(
       props.date,
@@ -154,6 +161,8 @@ export default function (props: any) {
             max={max}
             index={index}
             key={index}
+            removeperson = {removeperson}
+            openeditpersonweek = {openeditpersonweek}
           />
         );
       })}
@@ -161,10 +170,36 @@ export default function (props: any) {
   );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function PersonDayData(props: any) {
-  console.log("find me ");
-  console.log(props.value);
-  // const [peoplestats, setpeoplestats] = useState()
+
 
   const [slidervalue, setslidervalue] = useState([
     props.value.start,
@@ -201,7 +236,7 @@ function PersonDayData(props: any) {
           <Avatar size="sm" src="/static/images/avatar/3.jpg" />
         </Grid>
         <Grid item xs={1}>
-          <Button>
+          <Button onClick={()=>props.openeditpersonweek(props.value)}>
             {props.value.firstname + " " + props.value.lastname.charAt(0)}
           </Button>
         </Grid>
@@ -257,10 +292,10 @@ function PersonDayData(props: any) {
           <p style={{ textAlign: "center" }}>{props.max}</p>
         </Grid>
         <Grid item xs={0.5}>
-          <Button color="danger">X</Button>
+          <Button color="danger"onClick={() => props.removeperson(props.value)}>X</Button>
         </Grid>
       </CssVarsProvider>
     </Grid>
   );
 }
-//onClick={() => removeperson(value)}
+//
