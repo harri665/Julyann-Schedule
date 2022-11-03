@@ -1,10 +1,5 @@
-// var fs = require('fs');
-// var fs = remote.require('fs');
-// import * as fs from 'fs';
-// const fs = require('fs');
-// import * as fs from 'fs';
+
 const fs = require("fs");
-// import * as React from "react";
 
 const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -40,7 +35,7 @@ export class DataHandler {
             }
         }
         var Year; 
-        if(!fs.existsSync("./src/Schedules/"+yearin+".json")) {
+        if(!fs.existsSync("./src/Schedules/Years/"+yearin+".json")) {
             Year = {"properties": {"FullYear":yearin},"Year": []}; 
             var DAYSTOUSE = DAYS;   
             if((yearin % 100 === 0) ? (yearin % 400 === 0) : (yearin % 4 === 0)) {DAYSTOUSE = DAYS_LEAP}
@@ -55,7 +50,7 @@ export class DataHandler {
             this.saveYear(yearin)
             return Year.Year; 
         } else {
-            Year = require("./Schedules/"+yearin+".json")
+            Year = require("./Schedules/Years/"+yearin+".json")
             this.SCHEDULES.push(Year)
             return Year.Year; 
         }
@@ -65,13 +60,14 @@ export class DataHandler {
         for(let x =0; x < this.SCHEDULES.length; x++) {
             if(this.SCHEDULES[x].properties.FullYear == year) {
                 console.log(this.SCHEDULES[x],year)
-                fs.writeFile("./src/Schedules/"+year+".json",JSON.stringify(this.SCHEDULES[x]),function (err:any) {if (err) throw err;});
+                fs.writeFile("./src/Schedules/Years/"+year+".json",JSON.stringify(this.SCHEDULES[x]),function (err:any) {if (err) throw err;});
             }
         }
     }
     saveALL():void {
         for(let x=0; x< this.SCHEDULES.length; x++) {
-            this.saveYear(this.SCHEDULES.properties.FullYear); 
+            console.log(this.SCHEDULES[x])
+            this.saveYear(this.SCHEDULES[x].properties.FullYear); 
         }
     }
 

@@ -123,6 +123,7 @@ export default function (props: any) {
 
     setpeoplestats(props.schedule.getDayDate(props.date).people);
     reset();
+    props.schedule.saveALL()
     console.log(peoplestats);
   }
   return (
